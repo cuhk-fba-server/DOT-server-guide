@@ -119,12 +119,16 @@ This server is used for login and your data storage. You can do light computatio
 | -------- | ---------------- | ------- | ----------------- |
 | Python   | Yes              | Yes     | -                 |
 | R        | Yes              | Yes     | No                |
-| Stata    | No               | -       | No                |
+| Stata (needs extra application)   | Yes              | Yes     | No                |
 | MATLAB   | No               | No      | No                |
 
 ### Python and R
 
 Python is fully supported on our GPU servers and ready to use immediately through either Jupyter Notebook or command line interface. R is also available to all registered users through the same interfaces (See this [guide](R_guide.md) for more instructions if you have no prior experience to use R in Jupyter). 
+
+### Stata
+
+Stata is available on the server but requires an additional access application before use. This restriction exists because our subscription is a network license limited to 2 concurrent users. You must send an email beforehand or claim it when registering an account to request access. A guide is provided [here](stata.md).
 
 ### Additional Software Requests
 
