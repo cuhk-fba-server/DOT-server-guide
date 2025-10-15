@@ -36,9 +36,10 @@ setwd("/path/to/your/directory")
 ### **3. Install Libraries**
 
 Installing packages directly from a Jupyter notebook using `install.packages()` may result in errors such as:
+
 ![R-Lib-Installation-Error](./img/R_install_error.png)
 
-To install packages not available in the shared library pool, use the terminal. R will prompt you to create a personal user library folder if one doesn't already exist. Make sure to activate the correct environment before proceeding.
+To install packages not available in the shared library pool, use the terminal. R will prompt you to create a personal user library folder if one doesn't already exist. Make sure to activate the correct environment (`r_env`) before proceeding.
 
 ```shell
 # One-liner installation
