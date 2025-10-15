@@ -2,20 +2,9 @@
 
 Till now, we only provide R in Jupyter. This is a short guide introducing how to run your R scripts on JupyterLab.
 
-## Environment Initialization Before Use
-
-We have configurated R environment on our server. However, to work with R, you’ll need to load the `IRKernel` and activate it to get started on working with R in the notebook environment. You may run the following command in terminal to initialize:
-
-```
-$ R                               ## start R programming
-> IRkernel::installspec()         ## install R kernel
-```
-
-Quit R with `q()` and initiate a new launcher, you will find that the R kernel is available:
-
-![R Kernel in Jupyter](img/R_kernel.png)
-
 ## Run R in JupyterLab
+
+We have configurated R environment on our server using conda (`r_env`). Activate it by `conda activate r_env` and input `R` in terminal to get started with R, or click the R (4.3) button on the launcher page to initiate a notebook.
 
 ### **1. Two Ways to Use R in JupyterLab**
 
@@ -44,7 +33,25 @@ setwd("/path/to/your/directory")
 
 ------
 
-### **3. View Variables**
+### **3. Install Libraries**
+
+Installing packages directly from a Jupyter notebook using `install.packages()` may result in errors such as:
+![R-Lib-Installation-Error](./img/R_install_error.png)
+
+To install packages not available in the shared library pool, use the terminal. R will prompt you to create a personal user library folder if one doesn't already exist. Make sure to activate the correct environment before proceeding.
+
+```shell
+# One-liner installation
+$ R -e 'install.packages("dplyr")'
+
+# Or, enter R programming first and then input the command `install.packages`
+$ R
+> install.packages(c('repr', 'IRdisplay', 'evaluate', 'crayon', 'pbdZMQ', 'devtools', 'uuid', 'digest'))
+```
+
+------
+
+### **4. View Variables**
 
 **In Notebook:**
 
@@ -57,7 +64,7 @@ Same commands as above (`ls()`, `print()`, etc.).
 
 ------
 
-### **4. View and Save Graphs**
+### **5. View and Save Graphs**
 
 **In Notebook:**
 
@@ -83,7 +90,7 @@ Same commands as above (`ls()`, `print()`, etc.).
 
 ------
 
-### **5. Import Functions from Custom Scripts**
+### **6. Import Functions from Custom Scripts**
 
 Use `source()` to load functions from another R script:
 
@@ -94,7 +101,7 @@ source("utils.R")  # Imports functions from utils.R
 
 ------
 
-### **6. Save Variables or Workspace**
+### **7. Save Variables or Workspace**
 
 - **Save specific variables**:
 
@@ -111,20 +118,7 @@ save.image(file = "workspace.RData")
 
 ------
 
-### **7. Install Libraries**
 
-**Recommended method (terminal):**
-
-```shell
-# Install a package system-wide
-$ R -e 'install.packages("dplyr", repos="https://cran.r-project.org")'
-
-# Or, enter R programming first and then input the command `install.packages`
-$ R
-> install.packages(c('repr', 'IRdisplay', 'evaluate', 'crayon', 'pbdZMQ', 'devtools', 'uuid', 'digest'))
-```
-
-------
 
 ### **Tips for RStudio Users: Key Differences from RStudio**
 
