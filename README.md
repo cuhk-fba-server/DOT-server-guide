@@ -91,7 +91,9 @@ You will spend most of your time interacting with our **login node (113)**, incl
 > For SSH Users: If you are comfortable using SSH to connect to servers and prefer a straightforward approach without needing to learn advanced resource management tools like SLURM (which involves learning costs of using `srun` and `sbatch` commands to send your computation tasks to available compute nodes), you can directly use these compute nodes for your experiments.   
 
 
-#### Compute Nodes (137.189.75.114 & 137.189.75.115)
+#### Compute Nodes
+
+##### GTX4090 Servers (137.189.75.114 & 137.189.75.115)
 
 These two servers are equipped with graphics cards (NVIDIA 4090). You may use them for computational experiments. Below is the summary of these two servers. They are identical in configuration. 
 
@@ -99,8 +101,17 @@ These two servers are equipped with graphics cards (NVIDIA 4090). You may use th
 |---------|------------|
 |Operating System       |Ubuntu 22.04.4 LTS|
 |RAM                    |32GB DDR5-4800 ECC RDIMM [x16]|
-|CPU|Intel® Xeon® Gold 5416S 30M Cache, 2.00 GHz (16C32T) [x2]|
+|CPU|Intel® Xeon® Gold 5416S 30M Cache, 2.00GHz (16C32T) [x2]|
 |GPU|NVIDIA GeForce RTX 4090 24GB (CUDA 16,384 / Tensor 512) [x8]|
+
+##### GTX3090 Servers (137.189.75.137 & 137.189.75.142)
+
+|Component| Description|
+|---------|------------|
+|Operating System       |Ubuntu 22.04.4 LTS|
+|RAM                    |32GB DDR4-3200 ECC RDIMM [x8]|
+|CPU|Intel(R) Xeon(R) Gold 6348 CPU @ 2.60GHz (28C56T) [x2]|
+|GPU|NVIDIA GeForce RTX 3090 24GB (CUDA 10,496 / Tensor 328) [x2]|
 
 #### Login Node (137.189.75.113)
 
@@ -154,7 +165,9 @@ Using Jupyter requires only a browser—no special software installation needed.
 
 > [!Note]
 >
-> Each user's Jupyter server will automatically terminate after 3 days. For longer tasks that may exceed this time limit, we recommend either: adding periodic save points in your scripts, or using Method 2 (SSH connection) instead, which doesn't have this time limitation.
+> Each user's Jupyter server will automatically terminate after 1 days (24 hours). For longer tasks that may exceed this time limit, we recommend:
+> 1. add periodic save points in your scripts
+> 2. use Method 2 (SSH connection) instead, which doesn't have this time limitation.
 
 1. In your web browser, navigate to `137.189.75.113`. You'll see the following login page:
 
@@ -177,10 +190,10 @@ By default, a **Standard CPU** setup will be automatically selected. If you woul
 
 | Option                    | **Description**                                      | **Max CPU Power** | **Max RAM** | **GPU Available** |
 | ------------------------- | ---------------------------------------------------- | ----------------- | ----------- | ----------------- |
-| **Standard CPU Instance** | Suitable for general data analysis and computations  | 8 cores           | 32GB        | No GPU            |
+| **Standard CPU Instance** | Suitable for general data analysis and computations  | 12 cores           | 32GB        | No GPU            |
 | **High-Performance CPU**  | For large-scale computing and intensive data tasks   | 32 cores          | 64GB        | No GPU            |
-| **Small GPU Instance**    | Designed for deep learning with a single GPU         | 8 cores           | 32GB        | 1 GPU             |
-| **Medium GPU Instance**   | For mid-sized deep learning tasks with 2 GPUs        | 16 cores          | 48GB        | 2 GPUs            |
+| **Small GPU Instance**    | Designed for deep learning with a single GPU         | 16 cores           | 32GB        | 1 GPU             |
+| **Medium GPU Instance**   | For mid-sized deep learning tasks with 2 GPUs        | 24 cores          | 48GB        | 2 GPUs            |
 | **Large GPU Instance**    | High-performance setup for large-scale deep learning | 32 cores          | 64GB        | 4 GPUs            |
 
 ![image](./img/hpc-spawn-0.png)
@@ -335,6 +348,12 @@ SLURM (Simple Linux Utility for Resource Management) is a job scheduling system 
 > Using SLURM is **recommended but optional** for users who want more stable and flexible resource assignment. It's particularly valuable for long-running tasks and jobs requiring specific GPU allocations.
 >
 > If your code requires GPU resources or will run for extended periods, we highly recommend using SLURM. It ensures your tasks run smoothly without resource conflicts and allows you to disconnect while your job continues running. 
+
+|Partition Name |Nodes                |Resource in total                     |Description                |
+| -------------- | -------------------- | --------------------------------- | ----------------------------------------- |
+| **standard**   | gpu[114-115,137,142] | See specs below                   | Used for **JupyterHub**                   |
+| **gtx4090***   | gpu[114-115]         | 64 CPU, 8 GPU, 503G RAM per node  | Default patition for submitting GPU tasks |
+| **gtx3090**    | gpu[137,142]         | 112 CPU, 2 GPU, 250G RAM per node | Backup partition for submitting GPU tasks |
 
 For detailed usage instructions, see the [Slurm official documentation](https://slurm.schedmd.com/documentation.html). Below we provide a quick start guide:
 
