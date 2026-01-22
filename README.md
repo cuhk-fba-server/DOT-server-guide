@@ -6,11 +6,12 @@
 
 
 
-This repository provides an overview of servers in the Department of Decisions, Operations and Technology, CUHK Business School, including two GPU servers for computation and one server for storage and login (IP address: 137.189.75.113). 
+This repository provides an overview of servers in the Department of Decisions, Operations and Technology, CUHK Business School, including 3 GPU servers for computation and one server for storage and login (IP address: 137.189.75.119). 
 
-The cluster is designed to support research requiring significant computational resources, such as machine learning, data analytics, optimization algorithms, and simulation modeling. With a total of 16 high-performance GPUs, 128 CPU threads, and 144TB of storage, the system provides (relatively) substantial computing power for department research needs.
+The cluster is designed to support research requiring significant computational resources, such as machine learning, data analytics, optimization algorithms, and simulation modeling. With a total of 24 high-performance GPUs (Nvidia H100), 1536 CPU threads, and 502TB of storage, the system provides (relatively) substantial computing power for department research needs.
 
-> [!IMPORTANT]
+> ⚠️ **Important Note:**
+> 
 > For now, only the faculty and PhD Students of the Department of Decisions, Operations and Technology are allowed to apply for an account. If you are a CUHK affiliate, please ask your collaborating faculty of the DOT department to apply for an account on your behalf.
 
 Our HPC system follows a shared resource model that balances flexibility with efficiency:
@@ -23,39 +24,9 @@ If you encounter any issues with the system or have specific customization reque
 <br></br>
 > **Latest Update on Server Status:**
 > 
-> [July 21, 2025]
-> Server 114 is back online with 8 GPU cards available for use.
->
-> [July 14, 2025]
-> The maintenance on server 114 has been completed, and 7 GPU cards are now available for use. Another maintenance to identify the issue with the problematic GPU card (bus address: 0000:3F:00.0) is planned in the near future.
-> 
-> [July 2, 2025]
-> The maintenance on server 114 has been completed, and all services have returned to normal operation.
->
-> [May 8, 2025]
-> All the nodes are back to service.
->
-> [May 7, 2025]
-> Our GPU servers have been unavailable for the past two days. Users who logged in may have been unable to access their notebooks (always pending in queue). We're pleased to report that one server is now operational and JupyterHub access has been restored. We will notify all users when server 115 returns to service.
->
-> [March 24, 2025]
-> The old JupyterHub service on 115 has been shut down. Please stop using the old login credentials and switch to the new ones instead. The JupyterHub service on 113 is now operational after its scheduled maintenance period (1:30 - 2:00 PM).
->
-> [March 19, 2025]
-> GPU card issue resolved: The previously missing GPU card is now functioning properly. We apologize for any inconvenience caused by the unexpected server shutdown resulting from our miscommunication.
->
-> [March 18, 2025]
-> We've identified that one GPU card is missing from node 115. Our team is currently working with IT staff to inspect the physical connection. Once we identify the issue, a system reboot may be necessary. We will notify all users before any scheduled downtime.
->
-> [March 3, 2025]
-> We have completed the service upgrade and data migration. Our new high-performance computing (HPC) cluster now integrates the computational resources of two GPU servers with a centralized storage and management system. Existing users can access the cluster through IP address 137.189.75.113 via web browser (JupyterHub) or SSH connections. To minimize disruption, we've created backups of your previous working folders. You can find these backups as a compressed archive or a folder with timestamps indicating when they were created. If no major issues arise during the **pilot phase (by Mar 23)**, we plan to discontinue the existing JupyterHub service on 115.
->
-> [January 20, 2025]
-> The server (137.189.75.115) has been successfully restored. All services are up and running.
->
-> [January 18, 2025]
-> IP address 137.189.75.115 is currently inaccessible from campus network (both browser and SSH connections affected). We are working with IT staff to identify and > resolve the connectivity issue. We will notify all users once service is restored.
-> <br></br>
+> [Jan. 13, 2026]
+> The cluster is online and is available for user testing.
+> </br>
 
 ## Quick Start
 
@@ -68,11 +39,11 @@ Here’s a summary of the total computing resources available in our HPC cluster
 
 | Resource         | Quantity                     |
 | ---------------- | ---------------------------- |
-| CPU              | 64 cores, 128 threads        |
-| RAM              | 96GB (32GB DDR4 + 64GB DDR5) |
-| GPU              | 16 NVIDIA RTX 4090           |
-| Storage          | 144 TB (18TB × 8 drives)     |
-| Operating System | Ubuntu 22.04.4 LTS           |
+| CPU              | 768 (256x3) cores, 1,536(512x3) threads        |
+| RAM              | 9 (3x3) TB |
+| GPU              | 24 (8x3) NVIDIA H100           |
+| Storage          | 502 TB     |
+| Operating System | Ubuntu 22.04.5 LTS           |
 
 
 ### Components
@@ -82,47 +53,35 @@ Our cluster consists of two types of computer servers at this moment:
 - *Login nodes* handle user login, light computation, and storage.
 - *Compute nodes* handle heavy computation.
 
-![HPC-architecture](./img/architecture.png)
+![HPC-architecture](./img/architecture_1.png)
 
-You will spend most of your time interacting with our **login node (113)**, including using JupyterLab and uploading your files and codes. As all nodes share a common file system, your files will be available everywhere even though you are only uploading them to a login node.
-
-
-> [!TIP] 
-> For SSH Users: If you are comfortable using SSH to connect to servers and prefer a straightforward approach without needing to learn advanced resource management tools like SLURM (which involves learning costs of using `srun` and `sbatch` commands to send your computation tasks to available compute nodes), you can directly use these compute nodes for your experiments.   
+You will spend most of your time interacting with our **login node (119)**, including using JupyterLab and uploading your files and codes. As all nodes share a common file system, your files will be available everywhere even though you are only uploading them to a login node.
 
 
 #### Compute Nodes
 
-##### GTX4090 Servers (137.189.75.114 & 137.189.75.115)
+##### H100 Servers (137.189.75.116 & 137.189.75.117 & 137.189.75.118)
 
-These two servers are equipped with graphics cards (NVIDIA 4090). You may use them for computational experiments. Below is the summary of these two servers. They are identical in configuration. 
-
-|Component| Description|
-|---------|------------|
-|Operating System       |Ubuntu 22.04.4 LTS|
-|RAM                    |32GB DDR5-4800 ECC RDIMM [x16]|
-|CPU|Intel® Xeon® Gold 5416S 30M Cache, 2.00GHz (16C32T) [x2]|
-|GPU|NVIDIA GeForce RTX 4090 24GB (CUDA 16,384 / Tensor 512) [x8]|
-
-##### GTX3090 Servers (137.189.75.137 & 137.189.75.142)
+These three servers are equipped with graphics cards (NVIDIA H100). You may use them for computational experiments. Below is the summary of these three servers. They are identical in configuration. 
 
 |Component| Description|
 |---------|------------|
-|Operating System       |Ubuntu 22.04.4 LTS|
-|RAM                    |32GB DDR4-3200 ECC RDIMM [x8]|
-|CPU|Intel(R) Xeon(R) Gold 6348 CPU @ 2.60GHz (28C56T) [x2]|
-|GPU|NVIDIA GeForce RTX 3090 24GB (CUDA 10,496 / Tensor 328) [x2]|
+|Operating System       |Ubuntu 22.04.5 LTS|
+|RAM                    |3.2 TB DDR5|
+|CPU|AMD EPYC 9754 128-Core Processor [x2]|
+|GPU|NVIDIA H100 NVL (96GB) [x8]|
 
-#### Login Node (137.189.75.113)
+
+#### Login Node (137.189.75.119)
 
 This server is used for login and your data storage. You can do light computations on this server, but since they are shared by all users and many services are running on it, this is NOT RECOMMENDED.
 
 |Component| Description|
 |---------|------------|
-|Operating System| Ubuntu 22.04.4 LTS |
-|RAM| 32GB DDR4-3200 ECC RDIMM [x1] |
-|CPU| Intel® Xeon® Silver 4309Y 12M Cache, 2.80 GHz (8C16T) [x1] |
-|Storage|18TB SAS 12Gb/s 7.2K rpm Seagate Enterprise [x8]|
+|Operating System| Ubuntu 22.04.5 LTS |
+|RAM| 63GB |
+|CPU| Intel(R) Xeon(R) Silver 4310 CPU @ 2.10GHz [x2] |
+|Storage|1TB|
 
 ## Supported Software
 
@@ -163,19 +122,20 @@ If you're accessing the server from mainland China, you'll need the CUHK add-on 
 
 Using Jupyter requires only a browser—no special software installation needed. Follow these steps to begin working with our GPU resources:
 
-> [!Note]
+> ⚠️**NOTE**
 >
 > Each user's Jupyter server will automatically terminate after 1 days (24 hours). For longer tasks that may exceed this time limit, we recommend:
 > 1. add periodic save points in your scripts
 > 2. use Method 2 (SSH connection) instead, which doesn't have this time limitation.
 
-1. In your web browser, navigate to `137.189.75.113`. You'll see the following login page:
+1. In your web browser, navigate to `137.189.75.119`. You'll see the following login page:
 
 ![image](./img/hpc-login.png)
 
 2. Enter your username and password to log in. Wait a few seconds for your Jupyter server to start. You'll then see the familiar JupyterLab interface:
 
-> [!NOTE]
+> ⚠️**NOTE**
+>
 > You may see a `"Pending in Queue"` message. This indicates that your requested resources are not currently available. You can either select a lighter resource option or wait until you receive a notification that your server is ready.
 
 ![image](./img/hpc-jupyter.png)
@@ -190,25 +150,26 @@ By default, a **Standard CPU** setup will be automatically selected. If you woul
 
 | Option                    | **Description**                                      | **Max CPU Power** | **Max RAM** | **GPU Available** |
 | ------------------------- | ---------------------------------------------------- | ----------------- | ----------- | ----------------- |
-| **Standard CPU Instance** | Suitable for general data analysis and computations  | 12 cores           | 32GB        | No GPU            |
-| **High-Performance CPU**  | For large-scale computing and intensive data tasks   | 32 cores          | 64GB        | No GPU            |
-| **Small GPU Instance**    | Designed for deep learning with a single GPU         | 16 cores           | 32GB        | 1 GPU             |
-| **Medium GPU Instance**   | For mid-sized deep learning tasks with 2 GPUs        | 24 cores          | 48GB        | 2 GPUs            |
-| **Large GPU Instance**    | High-performance setup for large-scale deep learning | 32 cores          | 64GB        | 4 GPUs            |
+| **Standard CPU Instance** | Suitable for general data analysis and computations  | 64 cores           | 24GB        | No GPU            |
+| **Small GPU Instance**    | Designed for deep learning with a single GPU         | 64 cores           | 32GB        | 1 GPU             |
+| **Medium GPU Instance**   | For mid-sized deep learning tasks with 2 GPUs        | 128 cores          | 64GB        | 2 GPUs            |
+| **Large GPU Instance**    | High-performance setup for large-scale deep learning | 256 cores          | 128GB        | 4 GPUs            |
 
 ![image](./img/hpc-spawn-0.png)
 ![image](./img/hpc-spawn.png)
 
 3. You're now ready to start coding! We've provided two pre-configured conda environments for easy access (see installed libraries [here](./conda_envs.md)). Simply click one of the two Python buttons under "Notebook" to begin.
 
-> [!TIP]
+> ⚠ **TIPS**
+>
 > If you need a customized environment, you can create your own conda environment in a terminal by following the procedures described in the ["Custom Conda Environment"](#custom-conda-environment) section.
 
 ### Method 2. SSH
 
 SSH connection offers the most powerful and flexible way to work with our GPU servers, especially for computationally-intensive research projects. The same username and password will be used.
 
-> [!NOTE]
+> ⚠️ ** NOTE**
+>
 > If you choose to bypass our web-based JupyterHub service and connect via SSH directly, please first launch JupyterHub once to initialize the conda environments. Without this step, you may encounter errors indicating that the conda command or `.bashrc` file cannot be found.
 
 #### Recommended SSH Workflow
@@ -219,7 +180,8 @@ SSH connection offers the most powerful and flexible way to work with our GPU se
    - **SLURM jobs (Recommended)**: Use the `sbatch` command to submit jobs with specific resource requirements. This allows for efficient resource allocation and lets your jobs run even when you're disconnected. [Learn more about SLURM commands here](#running-time-consuming-scripts-efficiently-through-slurm).
    - **Direct execution**: For quick tests, you can run Python scripts directly on the compute nodes.
 
-> [!IMPORTANT]
+> ⚠️**IMPORTANT**
+>
 > Please avoid running intensive computational tasks on the login node (137.189.75.113), as it has limited CPU resources and is shared by all users for administrative purposes.
 
 #### Connection Methods
@@ -235,7 +197,8 @@ See our detailed [SSH connection guide](./SSH_access.pdf) for step-by-step instr
 
 Each user has a dedicated home directory located at `/mnt/disk5/home/username`. We've unified the storage system so you'll automatically access the same home directory whether connecting through SSH or JupyterHub on any node in our HPC cluster. This eliminates previous confusion with separate folders for different access methods.
 
-> [!NOTE]
+> ⚠️ ** NOTE**
+>
 > **Storage Limit:** While we will start to conduct weekly backups of your files for data protection, each user has a 2TB storage limit. This ensures optimal performance for all users sharing the cluster resources.
 
 #### Using JupyterHub (Beginner-Friendly)
