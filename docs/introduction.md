@@ -16,7 +16,7 @@ Our HPC system follows a shared resource model that balances flexibility with ef
 
 If you encounter any issues with the system or have specific customization requests, please contact the administrator via [this support form](https://docs.google.com/forms/d/e/1FAIpQLSfEhb-JFyDJY4YJZTm_8JhlqI9xnspSksopMaF1Cem5TAclyw/viewform?usp=sf_link). We maintain a regularly updated [troubleshooting document](https://github.com/QiansiqiHu/DOT-server/blob/main/Jupyter_env.pdf) that addresses common installation and configuration issues.
 
-# Common-configuration Cluster
+# Standard Cluster
 
 ## Resouce Summary
 
@@ -77,7 +77,7 @@ These two servers are equipped with graphics cards (NVIDIA 4090). You may use th
 
 
 
-# High-configuration Cluster
+# H100 Cluster
 
 ## Resouce Summary
 
