@@ -3,9 +3,12 @@
 * [Home](/)
 
 * [Introduction](introduction.md)
-* [Quick Start](quick_start.md)
-* [Common-configuration Cluster](common_cluster.md)
-* [High-configuration Cluster](h100cluster.md)
+
+* Quick Start
+
+* [Web Access (JupyterHub)](web_access.md)
+* [SLURM Task Submission](slurm_submission.md)
+* [Tips](tips.md)
 
 * Software Guides
 
