@@ -100,6 +100,12 @@ Once you're familiar with JupyterLab, you can follow the steps in our Quick Star
 
 You can also submit your computational jobs via Slurm. Slurm allows you to directly submit Python scripts and supports submitting jobs either individually or in batches. Our Quick Start guide provides a brief overview of how to use Slurm on our platform. If you'd like to learn more about Slurm in detail, please refer to its official [documentation](https://slurm.schedmd.com/documentation.html).
 
+- Method 3. SSH & SSH Client
+
+This is a method that will soon be deprecated; currently, **it is only available on the standard cluster and is no longer supported on the H100 cluster**.
+
+SSH connection offers the most powerful and flexible way to work with our GPU servers, especially for computationally-intensive research projects. The same username and password will be used.
+
 
 # H100 Cluster
 

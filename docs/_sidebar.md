@@ -8,6 +8,7 @@
 
 * [Web Access (JupyterHub)](web_access.md)
 * [SLURM Task Submission](slurm_submission.md)
+* [SSH & SSH Client](ssh_client.md)
 * [Tips](tips.md)
 
 * Software Guides
