@@ -1,8 +1,6 @@
 <!-- docs/_sidebar.md -->
 
-* [Home](/)
-
-* [Introduction](introduction.md)
+* [Introduction](README.md)
 
 * Quick Start
 
